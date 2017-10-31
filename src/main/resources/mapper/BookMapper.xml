@@ -17,17 +17,7 @@
     book_id = #{bookId}
   </select>
 
-  <select id="t111" resultType="Book">
-    <!-- 具体的sql -->
-    SELECT
-    book_id,
-    name,
-    number,
-    detail
-    FROM
-    book
-  </select>
-
+  <select id="t111" resultType="B"
   <select id="queryAll" resultType="Book">
     SELECT
     book_id,
