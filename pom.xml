@@ -18,10 +18,20 @@
     </dependency>
     <!-- 1.日志 -->
     <!-- 实现slf4j接口并整合 -->
-    <dependency>
+    <!--<dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>1.2.3</version>
+    </dependency>-->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.2</version>
     </dependency>
 
 
@@ -117,7 +127,7 @@
 
 
   <build>
-    <finalName>BookSystem</finalName>
+    <finalName>network</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

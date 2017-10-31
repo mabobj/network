@@ -2,9 +2,8 @@ package com.hisen.web;
 
 import com.hisen.entity.Book;
 import com.hisen.service.BookService;
-import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * Created by hisen on 17-4-24.
  */
 @Controller
 @RequestMapping("/book")
 public class BookController {
-  private Logger logger = LoggerFactory.getLogger(this.getClass());
+  protected Logger logger = LogManager.getLogger(this.getClass().getName());
 
   @Autowired
   private BookService bookService;
