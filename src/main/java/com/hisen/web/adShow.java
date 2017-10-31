@@ -3,8 +3,10 @@ package com.hisen.web;
 
 import com.hisen.frame.util.PropertiesTools;
 import com.hisen.frame.util.SystemUtil;
+import com.hisen.service.AdStoreService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/j1509431192285")
-public class adShow {
+public class AdShow {
     protected Logger logger = LogManager.getLogger(this.getClass().getName());
 
 
@@ -65,9 +67,15 @@ public class adShow {
         return "ad";
     }
 
-    @RequestMapping(value = "/j/{adId}", method = RequestMethod.GET)
-    private String adShow(HttpServletRequest request, HttpServletResponse response, @PathVariable("bookId") String adId, Model model) {
 
+    @Autowired
+    private AdStoreService adStoreService;
+
+
+    @RequestMapping(value = "/j/{adId}", method = RequestMethod.GET)
+    private String adShow(HttpServletRequest request, HttpServletResponse response, @PathVariable("adId") String adId, Model model) {
+
+        logger.debug(adStoreService.getAdInfoByJson("abcdef"));
 
 
         return "ad";
@@ -168,5 +176,13 @@ public class adShow {
                 }
             }
         }
+    }
+
+    public AdStoreService getAdStoreService() {
+        return adStoreService;
+    }
+
+    public void setAdStoreService(AdStoreService adStoreService) {
+        this.adStoreService = adStoreService;
     }
 }

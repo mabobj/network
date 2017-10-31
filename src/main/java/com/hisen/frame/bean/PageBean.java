@@ -6,7 +6,8 @@
  */
 package com.hisen.frame.bean;
 
-import com.frame.util.StringFunctionUtil;
+
+import com.hisen.frame.util.StringFunctionUtil;
 
 import java.util.HashMap;
 import java.util.List;
