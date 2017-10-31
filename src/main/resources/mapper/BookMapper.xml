@@ -17,7 +17,6 @@
     book_id = #{bookId}
   </select>
 
-  <select id="t111" resultType="B"
   <select id="queryAll" resultType="Book">
     SELECT
     book_id,
