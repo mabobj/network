@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,8 +35,10 @@ public class adShow {
             boolean t = false;
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("uId")) {
-                    t = true;
                     uId = cookie.getValue();
+                    if (uId != null && !uId.equals("")) {
+                        t = true;
+                    }
                 }
             }
             if (!t) {
@@ -62,14 +65,26 @@ public class adShow {
         return "ad";
     }
 
+    @RequestMapping(value = "/j/{adId}", method = RequestMethod.GET)
+    private String adShow(HttpServletRequest request, HttpServletResponse response, @PathVariable("bookId") String adId, Model model) {
 
-    /**
-     * 读取所有cookie
-     * 注意二、从客户端读取Cookie时，包括maxAge在内的其他属性都是不可读的，也不会被提交。浏览器提交Cookie时只会提交name与value属性。maxAge属性只被浏览器用来判断Cookie是否过期
-     *
-     * @param request
-     * @param response
-     */
+
+
+        return "ad";
+    }
+
+
+
+
+
+
+        /**
+         * 读取所有cookie
+         * 注意二、从客户端读取Cookie时，包括maxAge在内的其他属性都是不可读的，也不会被提交。浏览器提交Cookie时只会提交name与value属性。maxAge属性只被浏览器用来判断Cookie是否过期
+         *
+         * @param request
+         * @param response
+         */
     @RequestMapping("/showCookies")
     public void showCookies(HttpServletRequest request, HttpServletResponse response) {
 

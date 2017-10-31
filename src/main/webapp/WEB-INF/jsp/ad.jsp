@@ -7,6 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-document.writeln("<table style=\"width: 100%; height: 200px; left: 1px; bottom: 1px; z-index: 10000;  position: fixed;\" cellspacing=\"0\" cellpadding=\"0\">");
+document.writeln("<table style=\"width: 100%; height: 120px; left: 1px; bottom: 1px; z-index: 10000;  position: fixed;\" cellspacing=\"0\" cellpadding=\"0\">");
 document.writeln("<tr><td><a href=\"${requestScope.get('url')}\" target=\"_blank\"><img src=\"${requestScope.get('img')}\" width=\"100%\"></a></td></tr>");
 document.writeln("</table>");

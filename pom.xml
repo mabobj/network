@@ -47,6 +47,12 @@
       <artifactId>c3p0</artifactId>
       <version>0.9.1.2</version>
     </dependency>
+    <!-- 连接池 -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.0.4</version>
+    </dependency>
     <!-- DAO: MyBatis -->
     <dependency>
       <groupId>org.mybatis</groupId>
@@ -122,6 +128,32 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
       <version>4.1.7.RELEASE</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>4.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>2.6.0</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.1.39</version>
     </dependency>
   </dependencies>
 
