@@ -1,6 +1,8 @@
 package com.hisen.web;
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.hisen.entity.AdStore;
 import com.hisen.frame.util.PropertiesTools;
 import com.hisen.frame.util.SystemUtil;
 import com.hisen.service.AdStoreService;
@@ -18,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping("/j1509431192285")
 public class AdShow {
     protected Logger logger = LogManager.getLogger(this.getClass().getName());
 
@@ -30,7 +31,6 @@ public class AdShow {
         String uId = "";
         Long l = System.currentTimeMillis();
         String r = request.getHeader("Referer");
-
 
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -68,31 +68,65 @@ public class AdShow {
     }
 
 
-    @Autowired
-    private AdStoreService adStoreService;
+    @RequestMapping(value = "/j/{adGroup}", method = RequestMethod.GET)
+    private String adShow(HttpServletRequest request,
+                          HttpServletResponse response,
+                          @PathVariable("adGroup") String adGroup,
+                          Model model) {
 
 
-    @RequestMapping(value = "/j/{adId}", method = RequestMethod.GET)
-    private String adShow(HttpServletRequest request, HttpServletResponse response, @PathVariable("adId") String adId, Model model) {
+        String ip = SystemUtil.getIpAddr(request);
+        String uId = "";
+        Long l = System.currentTimeMillis();
+        String r = request.getHeader("Referer");
+        String u = request.getHeader("User-Agent");
 
-        logger.debug(adStoreService.getAdInfoByJson("abcdef"));
 
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            boolean t = false;
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("uId")) {
+                    uId = cookie.getValue();
+                    if (uId != null && !uId.equals("")) {
+                        t = true;
+                    }
+                }
+            }
+            if (!t) {
+                uId = SystemUtil.randomUUID();
+                Cookie cookie = new Cookie("uId", uId);
+                cookie.setMaxAge(24 * 60 * 60 * 999);// 设置为30min
+                cookie.setPath("/");
+                response.addCookie(cookie);
+            }
+        }
 
+        JSONObject jObj = AdStore.getInstance().getAdInfoByjObj(adGroup);
+
+        model.addAttribute("img", jObj.getString("img"));
+        model.addAttribute("url", jObj.getString("url"));
+
+        logger.info("ip=" + ip
+                + "\tuId=" + uId
+                + "\tg=" + adGroup
+                + "\ti=" + jObj.getString("img")
+                + "\tu=" + jObj.getString("url")
+                + "\tr=" + r
+                + "\tu=" + u
+                + "\tm=" + (System.currentTimeMillis() - l));
         return "ad";
+
     }
 
 
-
-
-
-
-        /**
-         * 读取所有cookie
-         * 注意二、从客户端读取Cookie时，包括maxAge在内的其他属性都是不可读的，也不会被提交。浏览器提交Cookie时只会提交name与value属性。maxAge属性只被浏览器用来判断Cookie是否过期
-         *
-         * @param request
-         * @param response
-         */
+    /**
+     * 读取所有cookie
+     * 注意二、从客户端读取Cookie时，包括maxAge在内的其他属性都是不可读的，也不会被提交。浏览器提交Cookie时只会提交name与value属性。maxAge属性只被浏览器用来判断Cookie是否过期
+     *
+     * @param request
+     * @param response
+     */
     @RequestMapping("/showCookies")
     public void showCookies(HttpServletRequest request, HttpServletResponse response) {
 
@@ -176,13 +210,5 @@ public class AdShow {
                 }
             }
         }
-    }
-
-    public AdStoreService getAdStoreService() {
-        return adStoreService;
-    }
-
-    public void setAdStoreService(AdStoreService adStoreService) {
-        this.adStoreService = adStoreService;
     }
 }

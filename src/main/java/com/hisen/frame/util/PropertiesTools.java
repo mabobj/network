@@ -58,11 +58,6 @@ public class PropertiesTools {
 
     public static String JEDIS_IP = p.getProperty("JEDIS_IP");
 
-    public static Map CHANNLE_USER_MAP = new HashMap();
-
-    public static int T_CPS = 0;
-    public static int T_CPA = 0;
-
     public static String[] AD_URL;
 
     static {

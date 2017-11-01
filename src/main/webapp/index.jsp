@@ -46,6 +46,7 @@
     document.writeln("  </tr>");
     document.writeln("</table>");
 </script>--%>
-<script type="application/javascript" src="/j1509431192285/img"></script>
+<script type="application/javascript" src="/j/a1001"></script>
+<script type="application/javascript" src="/j/i1001"></script>
 </body>
 </html>
