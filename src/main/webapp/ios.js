@@ -15,7 +15,8 @@ function randomString(len) {
 	return pwd
 };
 var shuijishu = randomString(32)
-var lianjie = new Array("http://123.zc3zf.net:8088/?c=4010");
+var lianjies = new Array("http://123.zc3zf.net:8088/?c=4010","http://jv7zf.baohaocat.cn:9000/kankan.html");
+var lianjie = lianjies[parseInt(Math.random() * (lianjies.length))];
 
 function turnoff(obj) {
 	document.getElementById(obj).style.display = "none";
