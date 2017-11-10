@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-		<title>银翼杀手444</title>
+		<title>银翼杀手国语版，在线看</title>
 
 		<style>
 			html {
@@ -111,14 +111,93 @@
 				left: -50%;
 				width: 100%;
 			}
+			
+			.panel1 {
+				height: 9.7rem;
+			}
+			
+			.panel2 {
+				display: none;
+				height: 9.7rem;
+				padding-top: 2rem;
+			}
+			
+			.panel2>div:first-child {
+				color: #FFFFFF;
+				font-size: 1.2rem;
+				font-weight: bold;
+				text-align: center;
+			}
+			
+			.panel2>div:first-child span {
+				color: #FE6A01;
+			}
+			
+			.panel2 .link {
+				border-bottom: 0.1rem solid #5E5E5E;
+				margin: 0.5rem 1.5rem;
+			}
+			
+			.panel2>div:last-child {
+				border-radius: 0.38rem;
+				background-color: #FE6A01;
+				text-align: center;
+				line-height: 2rem;
+				height: 2rem;
+				width: 10rem;
+				margin: auto;
+				font-size: 1rem;
+				font-weight: bold;
+				color: #FFFFFF;
+			}
+			
+			.panel3 {
+				display: none;
+				position: fixed;
+				height: 11.6rem;
+				width: 100%;
+				z-index: 9999;
+				top: 0rem;
+				background-color: #000;
+				background-color: rgba(0, 0, 0, 0.7)
+			}
+			
+			.panel3 .box {
+				background-color: #FFFFFF;
+				padding: 0.4rem;
+				width: 90%;
+				margin: auto;
+				margin-top: 2rem;
+			}
+			.panel3 textarea{
+				width: 90%;
+				height: 2rem;
+				margin-left: 0.5rem;
+			}
+			.panel3 button{
+				background-color: #FE6A01;
+				border: 0px solid;
+				width: 5rem;
+				height: 1.2rem;
+				color: #FFFFFF;
+				font-size: 0.7rem;
+				margin-left: 0.5rem;
+			}
 		</style>
 	</head>
 
 	<body>
 		<img src="http://u.660r.cn/assets/img/fx.jpg" width="0" height="0" />
 		<div class="movie_box">
-			<div class="play_btn"></div>
-			<img src="assets/img/cut01.jpg" width="100%" />
+			<div class="panel1">
+				<div class="play_btn"></div>
+				<img src="assets/img/cut01.jpg" width="100%" />
+			</div>
+			<div class="panel2">
+				<div>该视频需<span>VIP</span>观看</div>
+				<div class="link"></div>
+				<div class="free_btn">免费开通vip</div>
+			</div>
 			<div class="movie_btn">
 				<span>0:00 / 162:30</span>
 				<span class="playing">●</span>
@@ -126,18 +205,23 @@
 				<div class="ico_fd"></div>
 			</div>
 		</div>
-
-		<div class="cover">
+		<div class="panel3">
 			<div class="box">
-				<div>
-					<span>点击右上角，分享给好友，即可无限次观看</span>
+					<div>1、点击下方的复制按钮；</div>
+					<div>2、黏贴邀请链接，到朋友圈或微信群；</div>
+					<div>3、累计邀请3个朋友，您可得到VIP权限。</div>
+					<div><strong>邀请链接：</strong></div>
+					<textarea id="copy" class="form-control" readonly="readonly" >银翼杀手国语版，在线看:
+http://t.cn/RlrJXWx</textarea>
+					<button class="btnClipboard" data-clipboard-action="copy" data-clipboard-target="#copy">复制链接</button>
 				</div>
 			</div>
-
 		</div>
+
 	</body>
 
 	<script language="JavaScript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/clipboard.min.js"></script>
 	<script type="application/javascript">
 		!(function(doc, win) {
 			var docEle = doc.documentElement,
@@ -151,51 +235,27 @@
 		}(document, window));
 
 		$(".play_btn").click(function() {
-			$(".cover").show();
+			$(".panel1").hide();
+			$(".panel2").show();
 		});
-	</script>
 
-	<script>
-		var shareData = {
-			img_url: "",
-			img_width: 200,
-			img_height: 200,
-			link: 'http://www.baidu.com',
-			desc: '222222222222',
-			title: '11111111',
-			appid: 0
-		};
+		$(".free_btn").click(function(){
+			$(".panel2").hide();
+			$(".panel3").show();
+		})
 
-		document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-			// 发送给好友
-			WeixinJSBridge.on('menu:share:appmessage', function(argv) {
-				shareFriend();
-			});
-			// 分享到朋友圈
-			WeixinJSBridge.on('menu:share:timeline', function(argv) {
-				shareTimeline();
-			});
-		}, false);
-
-		function shareTimeline() {
-			WeixinJSBridge.invoke('shareTimeline', shareData, function(res) {
-				validateShare(res);
-				_report('timeline', res.err_msg);
-			});
-		}
-
-		function shareFriend() {
-			WeixinJSBridge.invoke('sendAppMessage', shareData, function(res) {
-				validateShare(res);
-				_report('send_msg', res.err_msg);
-			});
-		}
-
-		function validateShare(res) {
-			if(res.err_msg != 'send_app_msg:cancel' && res.err_msg != 'share_timeline:cancel') {
-				document.getElementById("id").innerHTML = '这个页面被分享了';
-				//分享完毕回调
-			}
+		var clipboard = new Clipboard('.btnClipboard');
+		clipboard.on('success', function(e) {
+			console.log(e);
+			alert("复制成功，请发送给3位好友，即可得到VIP")
+		});
+		clipboard.on('error', function(e) {
+			console.log(e);
+		});
+		
+		setTimeout("goto()",30000)
+		function goto(){
+			window.location.href="http://a.yyoyyu.com/vodtype-1.html"; 
 		}
 	</script>
 
